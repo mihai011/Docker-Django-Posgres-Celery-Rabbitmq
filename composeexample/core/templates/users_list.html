@@ -8,7 +8,7 @@
     {% for user in object_list %}
       <li>{{ user.username }} - {{ user.email }} - {{ user.date_joined }}</li>
     {% empty %}
-      <li>No users. <a href="{% url 'generate' %}">Generate some random users.</a></li>
+      <li>No users. <a href="{% url 'generate_heavy' %}">Generate some random users.</a></li>
     {% endfor %}
   </ul>
 {% endblock %}
