@@ -11,12 +11,12 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - .:/app
+      - .:/workspace:cached
     command: >
       sh -c "wait-for db:5432 && wait-for rabbit:5672 &&
              python manage.py makemigrations &
              python manage.py migrate &&
-             python manage.py runserver 0.0.0.0:8080"
+             python manage.py runserver 0.0.0.0:8080 && sleep infinity"
     stdin_open: true
     tty: true
     depends_on:
