@@ -9,8 +9,13 @@ RUN apk add --update --no-cache --virtual .tmp-build-deps \
       gcc libc-dev linux-headers postgresql-dev musl-dev
 RUN pip install --upgrade pip -r /requirements.txt
 # Delete virtual packages as we installed our dependencies
+RUN apk --no-cache add openjdk11 --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
+
 RUN apk del .tmp-build-deps
 
+RUN apk update 
+RUN apk upgrade
+RUN apk add bash
 
 RUN mkdir /app
 WORKDIR /app
@@ -19,5 +24,5 @@ COPY ./ /app
 COPY ./wait-for /bin/wait-for
 RUN chmod 777 -R /bin/wait-for
 
-RUN adduser -D user
-USER user
+# RUN adduser -D user
+# USER user
