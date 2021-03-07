@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_results',
     'composeexample.core'
 ]
 
@@ -133,7 +134,7 @@ STATIC_URL = '/static/'
 
 # Celery properties
 CELERY_BROKER_URL = 'amqp://admin:admin@rabbit:5672//'
-# CELERY_RESULT_BACKEND = 'django-db'
+# CELERY_RESULT_BACKEND = 'db+postgresql://postgres:postgres@db:5432/app'
 
 
 # trying to make manule routing 

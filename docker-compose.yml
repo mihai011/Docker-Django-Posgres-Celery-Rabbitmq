@@ -11,7 +11,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - .:/workspace:cached
+      - .:/app
     # command: >
     #   sh -c "wait-for db:5432 && wait-for rabbit:5672 &&
     #          python manage.py makemigrations &

@@ -1,8 +1,15 @@
 from pyspark import SparkContext
+import pyspark
+print(pyspark.__version__)
+import random
 
-logFile = "control.txt"  
-sc = SparkContext("spark:8080", "first app")
-logData = sc.textFile(logFile).cache()
-numAs = logData.filter(lambda s: 'a' in s).count()
-numBs = logData.filter(lambda s: 'b' in s).count()
-print ("Lines with a: %i, lines with b: %i" % (numAs, numBs))
+NUM_SAMPLES = 1000000000
+sc = SparkContext("spark://spark:7077", "test")
+
+def inside(p):
+    x, y = random.random(), random.random()
+    return x*x + y*y < 1
+
+count = sc.parallelize(range(0, NUM_SAMPLES)) \
+             .filter(inside).count()
+print("Pi is roughly %f" % (4.0 * count / NUM_SAMPLES))

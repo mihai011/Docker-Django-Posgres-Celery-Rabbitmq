@@ -53,6 +53,6 @@ class GenerateRandomNumberView(FormView):
 
     def form_valid(self, form):
         total = form.cleaned_data.get('total')
-        create_random_number.delay(total)
+        t = create_random_number.delay(total)
         messages.success(self.request, 'We are generating your random numbers! Wait a moment and refresh this page.')
         return redirect('numbers_list')

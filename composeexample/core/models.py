@@ -10,6 +10,3 @@ class Name(models.Model):
 class Number(models.Model):
     
     number = models.IntegerField()
-
-
-
