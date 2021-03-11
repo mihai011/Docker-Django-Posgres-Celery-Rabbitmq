@@ -80,18 +80,14 @@ services:
     networks:
       - shared_network
 
-  # worker_beat:
-  #   image: backend
-  #   restart: on-failure
-  #   command: >
-  #     sh -c "wait-for backend:8080 &&
-  #            celery -A composeexample.celery beat -l info"
-  #   depends_on:
-  #     - backend
-  #     - rabbit
-  #     - db
-  #   networks:
-  #     - shared_network
+  mailhog:
+    image: mailhog/mailhog
+    hostname: mailhog
+    ports: 
+      - '1025:1025' 
+      - '8025:8025' 
+    networks:
+      - shared_network
 
   spark:
     image: bitnami/spark
