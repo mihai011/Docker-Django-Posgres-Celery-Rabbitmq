@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'composeexample.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'HOST': 'db',
         'PORT': '5432',
         'NAME': 'app',
@@ -134,14 +134,14 @@ STATIC_URL = '/static/'
 
 # Celery properties
 CELERY_BROKER_URL = 'amqp://admin:admin@rabbit:5672//'
-CELERY_RESULT_BACKEND = 'db+postgresql://django-db'
+CELERY_RESULT_BACKEND = 'db+postgresql+psycopg2://postgres:postgres@db:5432/app'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = "mailhog"
 EMAIL_PORT = 1025
 
 
-# trying to make manule routing 
+# trying to make manual routing 
 
 # CELERY_TIMEZONE = TIME_ZONE
 # # CELERY_ACCEPT_CONTENT = ['json', 'pickle']

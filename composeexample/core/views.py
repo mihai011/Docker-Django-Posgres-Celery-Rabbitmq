@@ -5,8 +5,10 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import FormView
 from django.shortcuts import redirect
 
+from django.http import JsonResponse
+
 from .forms import GenerateRandomUserForm, GenerateRandomNumberForm, GenerateRandomNameForm
-from .tasks import create_random_user_accounts, create_random_number, create_random_name
+from .tasks import create_random_user_accounts, create_random_number, create_random_name, mail_send
 from .models import Name
 from .models import Number
 
@@ -56,3 +58,11 @@ class GenerateRandomNumberView(FormView):
         t = create_random_number.delay(total)
         messages.success(self.request, 'We are generating your random numbers! Wait a moment and refresh this page.')
         return redirect('numbers_list')
+
+
+def mail(request):
+
+    mail_send.delay()
+
+    return JsonResponse({})
+    

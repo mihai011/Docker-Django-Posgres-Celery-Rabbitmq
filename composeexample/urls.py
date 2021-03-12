@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^generate-heavy/$', views.GenerateRandomUserView.as_view(), name='generate_heavy'),
     url(r'^generate-medium/$', views.GenerateRandomNameView.as_view(), name='generate_medium'),
     url(r'^generate-easy/$', views.GenerateRandomNumberView.as_view(), name='generate_easy'),
+    url(r"^mail/$", views.mail, name="send_mail")
 ]

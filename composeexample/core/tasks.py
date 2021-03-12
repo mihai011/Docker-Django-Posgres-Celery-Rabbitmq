@@ -9,6 +9,9 @@ from .models import Name, Number
 
 from celery.decorators import task
 
+from django.core.mail import send_mail
+
+
 @task(queue="heavy")
 def create_random_user_accounts(total):
     for i in range(total):
@@ -35,3 +38,17 @@ def create_random_number(total):
         Number.objects.create(number=number)
     print('{} random numbers created with success!'.format(total))
     return '{} random numbers created with success!'.format(total)
+
+@task(queue="heavy")
+def mail_send():
+
+    v = send_mail(
+    'Subject here',
+    'Here is the message.',
+    'from@example.com',
+    ['to@example.com'],
+    fail_silently=False,
+    )
+
+    return v
+
