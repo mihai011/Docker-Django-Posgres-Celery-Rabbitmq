@@ -3,7 +3,7 @@ import pyspark
 print(pyspark.__version__)
 import random
 
-NUM_SAMPLES = 1000000000
+NUM_SAMPLES = 10000
 sc = SparkContext("spark://spark:7077", "test")
 
 def inside(p):

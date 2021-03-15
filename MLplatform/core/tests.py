@@ -9,6 +9,6 @@ class TestEnvironment(TestCase):
 
     def test_control(self):
 
-        env = Environment("makesome")
+        env = Environment()
         
 
