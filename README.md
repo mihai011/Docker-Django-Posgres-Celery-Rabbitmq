@@ -1,4 +1,4 @@
-# Docker-Django-Postgres-Celery-Rabbitmq
+# Spark-ML-Platform
 
 And example on using these technologies.
 
