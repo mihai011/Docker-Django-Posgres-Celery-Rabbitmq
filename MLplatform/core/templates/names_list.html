@@ -1,0 +1,14 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Names List</h2>
+
+  <ul>
+    {% for name in object_list %}
+      <li>{{ name.first_name }} - {{ name.family_name }} - {{ user.date_joined }}</li>
+    {% empty %}
+      <li>No names. <a href="{% url 'generate_medium' %}">Generate some random names.</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -46,7 +46,7 @@ services:
     restart: on-failure
     command: >
       sh -c "wait-for backend:8000 &&
-             celery -A composeexample.celery worker -Q heavy -l info -E"
+             celery -A MLplatform.celery worker -Q heavy -l info -E"
     depends_on:
       - backend
       - rabbit
@@ -59,7 +59,7 @@ services:
     restart: on-failure
     command: >
       sh -c "wait-for backend:8000 &&
-             celery -A composeexample.celery worker -Q medium -l info -E"
+             celery -A MLplatform.celery worker -Q medium -l info -E"
     depends_on:
       - backend
       - rabbit
@@ -72,7 +72,7 @@ services:
     restart: on-failure
     command: >
       sh -c "wait-for backend:8000 &&
-             celery -A composeexample.celery worker -Q easy -l info -E"
+             celery -A MLplatform.celery worker -Q easy -l info -E"
     depends_on:
       - backend
       - rabbit
