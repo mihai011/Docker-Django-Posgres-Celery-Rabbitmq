@@ -1,4 +1,6 @@
-<form method="post">{% csrf_token %}
+{% entends base %}
+
+<form method="post" action="">{% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Send message">
+    <input type="submit" value="Submit">
 </form>

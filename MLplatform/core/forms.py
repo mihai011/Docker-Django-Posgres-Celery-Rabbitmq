@@ -1,7 +1,7 @@
->>> from django.forms import ModelForm
+from django.forms import ModelForm
 from django.core.validators import MinValueValidator, MaxValueValidator
 
-from .models import *
+from .models import Machine, Instance, SparkMaster, Environment, MLProject, Experiment
 
 
 class MachineForm(ModelForm):
@@ -17,7 +17,7 @@ class InstanceForm(ModelForm):
     class Meta:
 
         model = Instance
-        fields = ['ip_address', 'host', 'RSA_KEY', 'ssh_user']
+        fields = ['ip', 'host', 'RSA_KEY', 'ssh_user']
 
 class SparkMasterForm(ModelForm):
 

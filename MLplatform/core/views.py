@@ -8,42 +8,46 @@ from django.views.generic import ListView
 
 from django.http import JsonResponse
 
-from .forms import *
-from .models import *
+from .forms import MachineForm, InstanceForm, SparkMasterForm, EnvironmentForm, MLProjectForm, ExperimentForm
+from .models import Machine, Instance, SparkMaster, Environment, MLProject, Experiment
 
 
 
 class MachineView(FormView):
 
     form_class = MachineForm
-    template_name = "base.html"
+    template_name = "form.html"
 
 class InstanceView(FormView):
 
     form_class = InstanceForm
-    template_name = "base.html"
+    template_name = "form.html"
 
 class SparkMasterView(FormView):
 
     form_class = SparkMasterForm
-    template_name = "base.html"
+    template_name = "form.html"
 
 class EnvironmentView(FormView):
 
     form_class = EnvironmentForm
-    template_name = "base.html"
+    template_name = "form.html"
 
 class MLProjectView(FormView):
 
     form_class = MLProjectForm
-    template_name = "base.html"
+    template_name = "form.html"
 
 class ExperimentView(FormView):
 
     form_class = ExperimentForm
-    template_name = "base.html"
+    template_name = "form.html"
 
-class 
+class MachineList(ListView):
+
+    model = Machine
+    template_name = "list.html"
+
 
 
 
