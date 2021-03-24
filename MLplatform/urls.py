@@ -15,13 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path, reverse
-from django.conf.urls import 
 
 
 from MLplatform.core import views
 
 urlpatterns = [
-    path('machine-form', views.MachineView.as_view(), name='machine_form', success_url="machine-form"),
+    path('machine-form', views.MachineView.as_view(), name='machine_form',),
     path('machine-list', views.MachineList.as_view(), name="machine_list")
 
 ]

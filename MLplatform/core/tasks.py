@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.utils.crypto import get_random_string
 
 from celery import shared_task
-from .models import Name, Number
+from .models import  Email
 
 from celery.decorators import task
 
@@ -40,13 +40,15 @@ def create_random_number(total):
     return '{} random numbers created with success!'.format(total)
 
 @task(queue="heavy")
-def mail_send():
+def mail_send(id):
+
+    email = Email.objects.get(id=id)
 
     v = send_mail(
-    'Subject here',
-    'Here is the message.',
-    'from@example.com',
-    ['to@example.com'],
+    email.subject,
+    email.message,
+    email.froml,
+    [email.to],
     fail_silently=False,
     )
 

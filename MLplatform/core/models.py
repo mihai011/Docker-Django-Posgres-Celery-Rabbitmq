@@ -32,3 +32,12 @@ class Experiment(models.Model):
 
     project = models.ForeignKey(MLProject, on_delete=models.RESTRICT)
     env = models.ForeignKey(Environment, on_delete=models.RESTRICT)
+
+
+class Email(models.Model):
+
+    subject = models.CharField(max_length=50)
+    message = models.CharField(max_length=50)
+    froml  = models.CharField(max_length=50)
+    to = models.CharField(max_length=50)
+
