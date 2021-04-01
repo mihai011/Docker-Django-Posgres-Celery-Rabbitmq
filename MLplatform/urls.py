@@ -20,6 +20,8 @@ from django.conf.urls import url
 from MLplatform.core import views
 
 urlpatterns = [
+
+    path('admin/', admin.site.urls),
     url(r'^$', views.BaseView.as_view(), name='users_list'),
 
 ]
