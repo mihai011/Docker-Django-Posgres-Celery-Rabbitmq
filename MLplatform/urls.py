@@ -14,14 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
-from django.conf.urls import url
+from django.urls import include, path, reverse
+
 
 from MLplatform.core import views
 
 urlpatterns = [
-
-    path('admin/', admin.site.urls),
-    url(r'^$', views.BaseView.as_view(), name='users_list'),
+    path('machine-form', views.MachineView.as_view(), name='machine_form',),
+    path('machine-list', views.MachineList.as_view(), name="machine_list")
 
 ]
