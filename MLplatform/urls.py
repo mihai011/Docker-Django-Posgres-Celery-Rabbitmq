@@ -21,6 +21,7 @@ from MLplatform.core import views
 
 urlpatterns = [
     path('machine-form', views.MachineView.as_view(), name='machine_form',),
-    path('machine-list', views.MachineList.as_view(), name="machine_list")
+    path('machine-list', views.MachineList.as_view(), name="machine_list"),
 
+    path('admin/', admin.site.urls),
 ]
