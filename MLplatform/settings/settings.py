@@ -135,6 +135,11 @@ USE_TZ = True
 
 
 
+<<<<<<< HEAD:MLplatform/settings.py
+=======
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+>>>>>>> 07b38e0bc3ae892e1f5163c9b0791a1b691a33ea:MLplatform/settings/settings.py
 
 # Celery properties
 CELERY_BROKER_URL = 'amqp://admin:admin@rabbit:5672//'
