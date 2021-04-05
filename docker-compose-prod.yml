@@ -16,7 +16,8 @@ services:
       sh -c "wait-for db:5432 && wait-for rabbit:5672 &&
              python manage.py makemigrations &
              python manage.py migrate &&
-             gunicorn MLplatform.wsgi:application --bind 0.0.0.0:8000 && sleep infinity"
+             python manage.py collectstatic --noinput &&
+             gunicorn MLplatform.wsgi:application --bind 0.0.0.0:8000"
     environment:
       - DJANGO_SETTINGS_MODULE=MLplatform.settings.production
     stdin_open: true
@@ -30,11 +31,13 @@ services:
   nginx:
     build: ./nginx
     volumes:
-      - /MLplatform/static:/home/app/web/staticfiles
+      - ./MLplatform/static:/app/static
     ports:
       - 1337:80
     depends_on:
       - backend
+    networks: 
+      - shared_network
 
   rabbit:
     image: rabbitmq:3-management
