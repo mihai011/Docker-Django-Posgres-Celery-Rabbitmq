@@ -37,7 +37,6 @@ class Experiment(models.Model):
 class Email(models.Model):
 
     subject = models.CharField(max_length=50)
-    message = models.CharField(max_length=50)
+    template = models.CharField(max_length=50)
     froml  = models.CharField(max_length=50)
     to = models.CharField(max_length=50)
-

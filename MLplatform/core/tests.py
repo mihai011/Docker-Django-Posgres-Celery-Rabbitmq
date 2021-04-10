@@ -20,7 +20,7 @@ class TestEmail(TestCase):
 
     def setUp(self):
 
-        self.email = Email(subject="Test", message="message", froml = "control@gmail.com", to="make@gmail.com")
+        self.email = Email(subject="Test", message="message_test", froml = "control@gmail.com", to="make@gmail.com")
         self.email.save()
 
     def test_email_function(self):
@@ -28,11 +28,15 @@ class TestEmail(TestCase):
         mail_send(self.email.id)
         self.assertEqual(len(mail.outbox), 1)
 
-    
     def test_email_apply(self):
 
         res = mail_send.apply(kwargs={"id":self.email.id})
         self.assertEqual(len(mail.outbox), 1)
+
+    # problems here 
+    def test_email_delay(self):
+
+        mail_send.delay(self.email.id)
 
     def tearDown(self):
 

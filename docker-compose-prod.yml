@@ -30,6 +30,7 @@ services:
 
   nginx:
     build: ./nginx
+    hostname: nginx
     volumes:
       - ./MLplatform/static:/app/static
     ports:

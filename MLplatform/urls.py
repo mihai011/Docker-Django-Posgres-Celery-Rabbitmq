@@ -17,11 +17,13 @@ from django.contrib import admin
 from django.urls import include, path, reverse
 
 
-from MLplatform.core import views
+from .core import views
 
 urlpatterns = [
-    path('machine-form', views.MachineView.as_view(), name='machine_form',),
+    path('machine-form', views.MachineView.as_view(), name='machine_form'),
     path('machine-list', views.MachineList.as_view(), name="machine_list"),
+
+    path('email', views.email_view, name="email_view"),
 
     path('admin/', admin.site.urls),
 ]

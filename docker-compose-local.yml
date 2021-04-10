@@ -20,13 +20,25 @@ services:
     command: > 
       sh -c "sleep infinity"
     environment:
-      - DJANGO_SETTINGS_MODULE=MLplatform.core.settings
+      - DJANGO_SETTINGS_MODULE=MLplatform.settings.settings
     stdin_open: true
     tty: true
     depends_on:
       - db
       - rabbit
     networks:
+      - shared_network
+
+  nginx:
+    build: ./nginx
+    hostname: nginx
+    volumes:
+      - ./MLplatform/static:/app/static
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+    networks: 
       - shared_network
 
   rabbit:
@@ -46,6 +58,10 @@ services:
   worker_heavy:
     image: backend
     restart: on-failure
+    volumes:
+      - .:/app
+    environment:
+      - DJANGO_SETTINGS_MODULE=MLplatform.settings.settings
     command: >
       sh -c "wait-for backend:8000 &&
              celery -A MLplatform.celery worker -Q heavy -l info -E"
@@ -59,6 +75,10 @@ services:
   worker_medium:
     image: backend
     restart: on-failure
+    volumes:
+      - .:/app
+    environment:
+      - DJANGO_SETTINGS_MODULE=MLplatform.settings.settings
     command: >
       sh -c "wait-for backend:8000 &&
              celery -A MLplatform.celery worker -Q medium -l info -E"
@@ -72,6 +92,10 @@ services:
   worker_easy:
     image: backend
     restart: on-failure
+    volumes:
+      - .:/app
+    environment:
+      - DJANGO_SETTINGS_MODULE=MLplatform.settings.settings
     command: >
       sh -c "wait-for backend:8000 &&
              celery -A MLplatform.celery worker -Q easy -l info -E"

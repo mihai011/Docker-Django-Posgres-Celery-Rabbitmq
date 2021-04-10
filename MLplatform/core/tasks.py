@@ -10,6 +10,12 @@ from .models import  Email
 from celery.decorators import task
 
 from django.core.mail import send_mail
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string, get_template
+from django.template import Context
+
+from django.conf import settings
+
 
 
 @task(queue="heavy")
@@ -44,13 +50,17 @@ def mail_send(id):
 
     email = Email.objects.get(id=id)
 
-    v = send_mail(
-    email.subject,
-    email.message,
-    email.froml,
-    [email.to],
-    fail_silently=False,
-    )
+    subject = email.subject
+    to = [email.to]
+    from_email = email.froml
 
-    return v
+    ctx = {
+        'user': 'buddy',
+        'purchase': 'Books',
+        'image_src': "http://{}/static/admin/img/download.jpg".format(settings.STATIC_HOST)
+    }
 
+    message = get_template(email.template).render(ctx)
+    msg = EmailMessage(subject, message, to=to, from_email=from_email)
+    msg.content_subtype = 'html'
+    msg.send()

@@ -6,10 +6,20 @@ from django.views.generic.edit import FormView
 from django.shortcuts import redirect
 from django.views.generic import ListView
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 
 from .forms import MachineForm, InstanceForm, SparkMasterForm, EnvironmentForm, MLProjectForm, ExperimentForm
-from .models import Machine, Instance, SparkMaster, Environment, MLProject, Experiment
+from .models import Machine, Instance, SparkMaster, Environment, MLProject, Experiment, Email
+
+from .tasks import mail_send
+
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+
+from django.db import IntegrityError, transaction
+from django.template.response import TemplateResponse
+
+from django.conf import settings
 
 
 
@@ -49,7 +59,12 @@ class MachineList(ListView):
     template_name = "list.html"
 
 
+def email_view(request):
 
 
+    email = Email(subject="subject", template="template_email.html", froml = "control@gmail.com", to="make@gmail.com")
+    email.save()
 
-    
+    transaction.on_commit(lambda: mail_send.delay(email.id))
+
+    return TemplateResponse(request, "template_email.html")
