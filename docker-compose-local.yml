@@ -171,6 +171,21 @@ services:
       - "54320:5432"
     networks:
       - shared_network
+    
+    
+  backup:
+    image: postgres:10-alpine
+    container_name: backup
+    hostname: backup
+    environment:
+      - POSTGRES_DB=app
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./backup_scripts:/scripts
+    networks:
+      - shared_network
+
       
 
 networks:

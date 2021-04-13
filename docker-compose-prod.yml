@@ -166,8 +166,6 @@ services:
       - shared_network
     
   
-      
-
 networks:
   shared_network:
     driver: bridge

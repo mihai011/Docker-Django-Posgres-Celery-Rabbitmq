@@ -1,5 +1,5 @@
-<img src= {{ image_src }} alt="My image">
+{% load static %}
+
+<img src= '{% static 'admin/img/download.jpg'  %}' alt="My image">
 
 {{user}}
-
-{{purchase}}
