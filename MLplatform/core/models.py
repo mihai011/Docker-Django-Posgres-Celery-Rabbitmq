@@ -40,3 +40,7 @@ class Email(models.Model):
     template = models.CharField(max_length=50)
     froml  = models.CharField(max_length=50)
     to = models.CharField(max_length=50)
+
+class Test(models.Model):
+
+    test = models.CharField(max_length=20)

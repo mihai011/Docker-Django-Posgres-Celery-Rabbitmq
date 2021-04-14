@@ -48,9 +48,3 @@ fi;
 
 
 pg_restore -h $LOCALHOST -p 5432 -U postgres -d app -v $BACKUP_DIR
-
-
-
-
-
-

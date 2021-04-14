@@ -1,0 +1,7 @@
+FROM postgres:10-alpine
+
+COPY /backup_scripts/.pgpass .pgpass
+COPY /backup_scripts/backup.sh backup.sh
+COPY /backup_scripts/restore.sh restore.sh
+
+

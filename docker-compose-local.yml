@@ -174,19 +174,18 @@ services:
     
     
   backup:
-    image: postgres:10-alpine
+    build:
+      context: .
+      dockerfile: Dockerfile-backup
     container_name: backup
     hostname: backup
     environment:
       - POSTGRES_DB=app
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-    volumes:
-      - ./backup_scripts:/scripts
     networks:
       - shared_network
 
-      
 
 networks:
   shared_network:

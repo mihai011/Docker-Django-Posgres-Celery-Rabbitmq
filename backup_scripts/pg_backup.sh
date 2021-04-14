@@ -70,23 +70,23 @@ fi;
 ### GLOBALS BACKUPS ###
 #######################
 
-echo -e "\n\nPerforming globals backup"
-echo -e "--------------------------------------------\n"
+# echo -e "\n\nPerforming globals backup"
+# echo -e "--------------------------------------------\n"
 
-if [ $ENABLE_GLOBALS_BACKUPS = "yes" ]
-then
-        echo "Globals backup"
+# if [ $ENABLE_GLOBALS_BACKUPS = "yes" ]
+# then
+#         echo "Globals backup"
 
-        set -o pipefail
-        if ! pg_dumpall -g -h "$HOSTNAME" -U "$USERNAME" | gzip > $FINAL_BACKUP_DIR"globals".sql.gz.in_progress; then
-                echo "[!!ERROR!!] Failed to produce globals backup" 1>&2
-        else
-                mv $FINAL_BACKUP_DIR"globals".sql.gz.in_progress $FINAL_BACKUP_DIR"globals".sql.gz
-        fi
-        set +o pipefail
-else
-	echo "None"
-fi
+#         set -o pipefail
+#         if ! pg_dumpall -g -h "$HOSTNAME" -U "$USERNAME" --no-password | gzip > $FINAL_BACKUP_DIR"globals".sql.gz.in_progress; then
+#                 echo "[!!ERROR!!] Failed to produce globals backup" 1>&2
+#         else
+#                 mv $FINAL_BACKUP_DIR"globals".sql.gz.in_progress $FINAL_BACKUP_DIR"globals".sql.gz
+#         fi
+#         set +o pipefail
+# else
+# 	echo "None"
+# fi
 
 
 ###########################
@@ -112,7 +112,7 @@ do
 	echo "Schema-only backup of $DATABASE"
 
 	set -o pipefail
-	if ! pg_dump -Fp -s -h "$HOSTNAME" -U "$USERNAME" "$DATABASE" | gzip > $FINAL_BACKUP_DIR"$DATABASE"_SCHEMA.sql.gz.in_progress; then
+	if ! pg_dump -Fp -s -h "$HOSTNAME" -U "$USERNAME" "$DATABASE" --no-password | gzip > $FINAL_BACKUP_DIR"$DATABASE"_SCHEMA.sql.gz.in_progress; then
 		echo "[!!ERROR!!] Failed to backup database schema of $DATABASE" 1>&2
 	else
 		mv $FINAL_BACKUP_DIR"$DATABASE"_SCHEMA.sql.gz.in_progress $FINAL_BACKUP_DIR"$DATABASE"_SCHEMA.sql.gz
@@ -142,7 +142,7 @@ do
 		echo "Plain backup of $DATABASE"
 
 		set -o pipefail
-		if ! pg_dump -Fp -h "$HOSTNAME" -U "$USERNAME" "$DATABASE" | gzip > $FINAL_BACKUP_DIR"$DATABASE".sql.gz.in_progress; then
+		if ! pg_dump -Fp -h "$HOSTNAME" -U "$USERNAME" "$DATABASE" --no-password | gzip > $FINAL_BACKUP_DIR"$DATABASE".sql.gz.in_progress; then
 			echo "[!!ERROR!!] Failed to produce plain backup database $DATABASE" 1>&2
 		else
 			mv $FINAL_BACKUP_DIR"$DATABASE".sql.gz.in_progress $FINAL_BACKUP_DIR"$DATABASE".sql.gz
@@ -154,7 +154,7 @@ do
 	then
 		echo "Custom backup of $DATABASE"
 
-		if ! pg_dump -Fc -h "$HOSTNAME" -U "$USERNAME" "$DATABASE" -f $FINAL_BACKUP_DIR"$DATABASE".custom.in_progress; then
+		if ! pg_dump -Fc -h "$HOSTNAME" -U "$USERNAME" "$DATABASE" --no-password -f $FINAL_BACKUP_DIR"$DATABASE".custom.in_progress; then
 			echo "[!!ERROR!!] Failed to produce custom backup database $DATABASE" 1>&2
 		else
 			mv $FINAL_BACKUP_DIR"$DATABASE".custom.in_progress $FINAL_BACKUP_DIR"$DATABASE".custom
