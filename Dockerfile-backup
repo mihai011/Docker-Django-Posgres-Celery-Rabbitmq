@@ -4,4 +4,4 @@ COPY /backup_scripts/.pgpass .pgpass
 COPY /backup_scripts/backup.sh backup.sh
 COPY /backup_scripts/restore.sh restore.sh
 
-
+RUN apk add sshpass
