@@ -147,6 +147,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = "mailhog"
 EMAIL_PORT = 1025
 
+#spark url
+SPARK_URL = "spark://spark:7077"
+
 
 # trying to make manual routing 
 
