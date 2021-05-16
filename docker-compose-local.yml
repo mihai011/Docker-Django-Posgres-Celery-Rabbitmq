@@ -49,9 +49,6 @@ services:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
       - RABBITMQ_DEFAULT_VHOST=/
-    ports:
-      - "5682:5672"
-      - "15682:15672"
     networks:
       - shared_network
 
@@ -167,8 +164,6 @@ services:
       - POSTGRES_DB=app
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-    ports:
-      - "54320:5432"
     networks:
       - shared_network
     

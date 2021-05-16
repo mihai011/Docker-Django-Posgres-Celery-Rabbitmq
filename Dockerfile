@@ -19,7 +19,6 @@ RUN apk add bash
 
 RUN mkdir /app
 WORKDIR /app
-COPY ./ /app
 
 COPY ./wait-for /bin/wait-for
 RUN chmod 777 -R /bin/wait-for
